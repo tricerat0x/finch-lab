@@ -10,7 +10,7 @@
         <span class="card-title">{{ finch.name }}</span>
         <p>Breed: {{ finch.breed }}</p>
         <p>Description: {{ finch.description|linebreaks }}</p>
-        {% if cat.age > 0 %}
+        {% if finch.age > 0 %}
           <p>Age: {{ finch.age }}</p>
         {% else %}
           <p>Age: Kitten</p>
