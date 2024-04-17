@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% block content %}
 <h1>Finch Details</h1>
 
 <div class="card">
@@ -11,7 +11,7 @@
     {% if finch.age > 0 %}
       <p>Age: {{ finch.age }}</p>
     {% else %}
-      <p>Age: Kitten</p>
+      <p>Age: Not specified</p> 
     {% endif %}
   </div>
   <div class="card-action">
@@ -19,5 +19,21 @@
     <a href="{% url 'finches_delete' finch.id %}">Delete</a>
   </div>
 </div>
+
+<h2>Feedings</h2>
+<ul>
+    {% for feeding in finch.feedings.all %}  
+        <li>{{ feeding.meal }} on {{ feeding.date }}</li>
+    {% empty %}
+        <li>No feedings yet.</li>
+    {% endfor %}
+</ul>
+
+<h2>Add a New Feeding</h2>
+<form method="post" action="{% url 'add_feeding' finch.id %}">
+    {% csrf_token %}
+    {{ feeding_form.as_p }}
+    <button type="submit">Add Feeding</button>
+</form>
 
 {% endblock %}
