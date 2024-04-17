@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Finch, Feeding
+from .models import Finch, Feeding, TOy
 from .forms import FeedingForm
 
 def home(request):
@@ -50,4 +50,17 @@ class FinchDelete(DeleteView):
 
     def get_success_url(self):
         return reverse('finches_index')
+
+lass ToyList(ListView):
+    model = Toy
+    template_name = 'toys/toy_list.html'
+
+class ToyDetail(DetailView):
+    model = Toy
+    template_name = 'toys/toy_detail.html'
+
+class ToyCreate(CreateView):
+    model = Toy
+    fields = ['name', 'color']
+    template_name = 'toys/toy_form.html'
 
