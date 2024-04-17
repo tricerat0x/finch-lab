@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Toys</h1>
+
+<section>
+  <h2>All Toys</h2>
+  <ul>
+    {% for toy in toys %}
+    <li><a href="?toy_id={{ toy.id }}">{{ toy.name }}</a> - Color: {{ toy.color }}</li>
+    {% empty %}
+    <li>No toys found.</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% if current_toy %}
+<section>
+  <h2>Toy Details</h2>
+  <p>Name: {{ current_toy.name }}</p>
+  <p>Color: {{ current_toy.color }}</p>
+</section>
+{% endif %}
+
+<section>
+  <h2>Add a New Toy</h2>
+  <form method="post" action="{% url 'toys_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Toy</button>
+  </form>
+</section>
+
+{% endblock %}
